@@ -8,4 +8,5 @@ pip install Faker
 flask db init
 flask db migrate -m "Initial migration."
 flask db upgrade
-
+flask db migrate -m "Added Category and Brand models"
+flask db upgrade
