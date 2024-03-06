@@ -27,3 +27,29 @@ def show_products():
     next_direction = 'desc' if direction == 'asc' else 'asc'
 
     return render_template('products.html', products=products, sort=sort, direction=direction, next_direction=next_direction)
+
+@bp.route('/categories')
+def show_categories():
+    sort_by = request.args.get('sort', 'id')
+    direction = request.args.get('direction', 'asc')
+    if direction not in ['asc', 'desc']:
+        direction = 'asc'
+    if sort_by == 'name':
+        categories = Category.query.order_by(Category.name.asc() if direction == 'asc' else Category.name.desc()).all()
+    else:
+        categories = Category.query.order_by(Category.id.asc() if direction == 'asc' else Category.id.desc()).all()
+    next_direction = 'desc' if direction == 'asc' else 'asc'
+    return render_template('categories.html', categories=categories, sort=sort_by, direction=direction, next_direction=next_direction)
+
+@bp.route('/brands')
+def show_brands():
+    sort_by = request.args.get('sort', 'id')
+    direction = request.args.get('direction', 'asc')
+    if direction not in ['asc', 'desc']:
+        direction = 'asc'
+    if sort_by == 'name':
+        brands = Brand.query.order_by(Brand.name.asc() if direction == 'asc' else Brand.name.desc()).all()
+    else:
+        brands = Brand.query.order_by(Brand.id.asc() if direction == 'asc' else Brand.id.desc()).all()
+    next_direction = 'desc' if direction == 'asc' else 'asc'
+    return render_template('brands.html', brands=brands, sort=sort_by, direction=direction, next_direction=next_direction)

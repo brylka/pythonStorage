@@ -5,8 +5,11 @@
     <title>Products</title>
 </head>
 <body>
+    <h2>Products</h2>
     <table border="1">
         <tr>
+            <th>Lp.</th>
+            <th><a href="?sort=id&direction={{ 'asc' if sort != 'id' else next_direction }}">ID</a></th>
             <th><a href="?sort=name&direction={{ 'asc' if sort != 'name' else next_direction }}">Name</a></th>
             <th><a href="?sort=category&direction={{ 'asc' if sort != 'category' else next_direction }}">Category</a></th>
             <th><a href="?sort=brand&direction={{ 'asc' if sort != 'brand' else next_direction }}">Brand</a></th>
@@ -15,6 +18,8 @@
         </tr>
         {% for product in products %}
         <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
             <td>{{ product.category.name }}</td>
             <td>{{ product.brand.name }}</td>

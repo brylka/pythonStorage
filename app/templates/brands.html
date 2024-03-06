@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brands</title>
+</head>
+<body>
+    <h2>Brands</h2>
+    <table border="1">
+        <tr>
+            <th>Lp.</th>
+            <th><a href="?sort=id&direction={{ 'asc' if sort != 'id' or direction == 'desc' else 'desc' }}">ID</a></th>
+            <th><a href="?sort=name&direction={{ 'asc' if sort != 'name' or direction == 'desc' else 'desc' }}">Name</a></th>
+        </tr>
+        {% for brand in brands %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ brand.id }}</td>
+            <td>{{ brand.name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
