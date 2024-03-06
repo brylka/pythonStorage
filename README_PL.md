@@ -25,6 +25,14 @@ flask db migrate
 flask db upgrade
 ```
 
+## Dodanie losowych danych do bazy
+
+Aby dodać losowe dane do bazy danych uruchom polecenie:
+
+```
+python scripts/generate_fake_data.py
+```
+
 ## Uruchamianie aplikacji
 
 Aplikację można uruchomić za pomocą polecenia:

@@ -25,6 +25,14 @@ flask db migrate
 flask db upgrade
 ```
 
+## Adding random data to the database
+
+To add random data to the database run the command:
+
+```
+python scripts/generate_fake_data.py
+```
+
 ## Running the application
 
 The application can be launched using the command:
