@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th><a href="?sort=name&direction={{ 'asc' if sort != 'name' else next_direction }}">Name</a></th>
+            <th><a href="?sort=category&direction={{ 'asc' if sort != 'category' else next_direction }}">Category</a></th>
+            <th><a href="?sort=brand&direction={{ 'asc' if sort != 'brand' else next_direction }}">Brand</a></th>
+            <th><a href="?sort=price&direction={{ 'asc' if sort != 'price' else next_direction }}">Price</a></th>
+            <th><a href="?sort=rating&direction={{ 'asc' if sort != 'rating' else next_direction }}">Rating</a></th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.brand }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.rating }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

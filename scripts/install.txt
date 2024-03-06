@@ -1,0 +1,11 @@
+pip install flask
+pip install flask-cors
+pip install flask_sqlalchemy
+pip install pymysql
+pip install Flask-Migrate
+pip install Faker
+
+flask db init
+flask db migrate -m "Initial migration."
+flask db upgrade
+
