@@ -1,7 +1,10 @@
-from app import db, app
-from app import Product
 from faker import Faker
 import random
+
+from app import create_app
+from app.models import Product, db
+
+app = create_app()
 
 def add_random_products(number=10):
     fake = Faker()
