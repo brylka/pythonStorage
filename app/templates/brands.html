@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Brands</title>
-</head>
-<body>
-    {% include 'navmenu.html' %}
+{% extends 'base.html' %}
+
+{% block title %}Brands{% endblock %}
+
+{% block content %}
     <h2>Brands</h2>
     <table border="1">
         <tr>
@@ -21,5 +18,4 @@
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+{% endblock %}
