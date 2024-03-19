@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
+from app import db
 from app.models import Product, Category, Brand
 
 bp = Blueprint('main', __name__)
@@ -40,6 +41,33 @@ def show_categories():
         categories = Category.query.order_by(Category.id.asc() if direction == 'asc' else Category.id.desc()).all()
     next_direction = 'desc' if direction == 'asc' else 'asc'
     return render_template('categories.html', categories=categories, sort=sort_by, direction=direction, next_direction=next_direction)
+
+@bp.route('/categories/add', methods=['GET', 'POST'])
+def add_category():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        if name:
+            new_category = Category(name=name)
+            db.session.add(new_category)
+            db.session.commit()
+            return redirect(url_for('main.show_categories'))
+    return render_template('category_add.html')
+
+@bp.route('/categories/edit/<int:id>', methods=['GET', 'POST'])
+def edit_category(id):
+    category = Category.query.get_or_404(id)
+    if request.method == 'POST':
+        category.name = request.form['name']
+        db.session.commit()
+        return redirect(url_for('main.show_categories'))
+    return render_template('category_edit.html', category=category)
+
+@bp.route('/categories/delete/<int:id>', methods=['POST'])
+def delete_category(id):
+    category = Category.query.get_or_404(id)
+    db.session.delete(category)
+    db.session.commit()
+    return redirect(url_for('main.show_categories'))
 
 @bp.route('/brands')
 def show_brands():

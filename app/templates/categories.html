@@ -5,17 +5,26 @@
 {% block content %}
     <h2>Categories</h2>
 
+    <p><a href="{{ url_for('main.add_category') }}">Add New Category</a></p>
+
     <table>
         <tr>
             <th>Lp.</th>
             <th><a href="?sort=id&direction={{ 'asc' if sort != 'id' or direction == 'desc' else 'desc' }}">ID</a></th>
             <th><a href="?sort=name&direction={{ 'asc' if sort != 'name' or direction == 'desc' else 'desc' }}">Name</a></th>
+            <th>Actions</th>
         </tr>
         {% for category in categories %}
         <tr>
             <td>{{ loop.index }}</td>
             <td>{{ category.id }}</td>
             <td>{{ category.name }}</td>
+            <td>
+                <a href="{{ url_for('main.edit_category', id=category.id) }}">Edit</a> |
+                <form style="display: inline;" action="{{ url_for('main.delete_category', id=category.id) }}" method="post">
+                    <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>
