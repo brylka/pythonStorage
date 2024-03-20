@@ -95,4 +95,7 @@ def add_product():
             db.session.add(new_product)
             db.session.commit()
             return redirect(url_for('main.show_products'))
-    return render_template('product_add.html')
+    else:
+        categories = Category.query.all()
+        brands = Brand.query.all()
+        return render_template('product_add.html', categories=categories, brands=brands)
