@@ -81,3 +81,18 @@ def show_brands():
         brands = Brand.query.order_by(Brand.id.asc() if direction == 'asc' else Brand.id.desc()).all()
     next_direction = 'desc' if direction == 'asc' else 'asc'
     return render_template('brands.html', brands=brands, sort=sort_by, direction=direction, next_direction=next_direction)
+
+@bp.route('/products/add', methods=['GET', 'POST'])
+def add_product():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        category_id = request.form.get('category_id')
+        brand_id = request.form.get('brand_id')
+        price = request.form.get('price')
+        rating = request.form.get('rating')
+        if name:
+            new_product = Product(name=name, category_id=category_id, brand_id=brand_id, price=price, rating=rating)
+            db.session.add(new_product)
+            db.session.commit()
+            return redirect(url_for('main.show_products'))
+    return render_template('product_add.html')
